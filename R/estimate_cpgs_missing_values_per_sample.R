@@ -25,7 +25,7 @@ estimate_cpgs_missing_values_per_sample = function(meth_rse, assay = 1, number_c
   meth_rse_sample = subsetByOverlaps(meth_rse, sample_cpgs)
   
   # Calculate the proportion of missing values per sample and return
-  missing_values = colSums(is.na(assay(meth_rse_sample, i = assay)))/number_cpgs
+  missing_values = MatrixGenerics::colSums2(is.na(assay(meth_rse_sample, i = assay)))/number_cpgs
   return(missing_values)
   
 }

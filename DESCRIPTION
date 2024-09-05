@@ -23,6 +23,7 @@ Imports:
     GenomeInfoDb,
     GenomicRanges,
     IRanges,
+    MatrixGenerics,
     methodical,
     methodicalFinal,
     methylSig,
