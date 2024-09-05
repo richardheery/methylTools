@@ -4,19 +4,22 @@
 #' @param assay The assay from meth_rse to extract values from. 
 #' Should be either an index or the name of an assay. Default is the first assay. 
 #' @param number_cpgs Number of CpG sites to sample. Default is 1000. 
-#' @param first_seq_only A logical value indicating whether to restrict sampling to 
-#' the first sequence level of meth_rse to increase speed. Default value is TRUE. 
+#' @param filter_seq_levels An optional vector with the sequence levels to restrict sampling of CpGs to.
+#' Setting to just a single sequence level can substantially speed up running time.
 #' @return A numeric vector with the proportion of missing values found in each sample.
 #' @export
-estimate_cpgs_missing_values_per_sample = function(meth_rse, assay = 1, number_cpgs = 1000, first_seq_only = TRUE){
+estimate_cpgs_missing_values_per_sample = function(meth_rse, assay = 1, number_cpgs = 1000, filter_seq_levels = NULL){
   
   # Extract CpGs from meth_rse as a GRanges
   cpgs = rowRanges(meth_rse)
   
-  # If first_seq_only is set to TRUE, subset cpgs for ranges on the first sequence
-  if(first_seq_only){
-    cpgs = cpgs[seqnames(cpgs) == seqlevels(cpgs)[1]]
+  # If filter_seq_levels is NULL, set to all seqlevels from meth_rse
+  if(is.null(filter_seq_levels)){
+    filter_seq_levels = seqlevels(meth_rse)
   }
+  
+  # Subset CpGs for those on filter_seq_levels
+  cpgs = cpgs[seqnames(cpgs) %in% filter_seq_levels]
   
   # Sample CpGs
   sample_cpgs = sample(cpgs, number_cpgs)
