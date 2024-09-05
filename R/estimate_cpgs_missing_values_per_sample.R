@@ -29,6 +29,7 @@ estimate_cpgs_missing_values_per_sample = function(meth_rse, assay = 1, number_c
   
   # Calculate the proportion of missing values per sample and return
   missing_values = MatrixGenerics::colSums2(is.na(assay(meth_rse_sample, i = assay)))/number_cpgs
+  names(missing_values) = colnames(meth_rse)
   return(missing_values)
   
 }
