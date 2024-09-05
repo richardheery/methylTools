@@ -19,7 +19,7 @@ estimate_cpgs_missing_values_per_sample = function(meth_rse, assay = 1, number_c
   }
   
   # Subset CpGs for those on filter_seq_levels
-  cpgs = cpgs[seqnames(cpgs) %in% filter_seq_levels]
+  cpgs = cpgs[as.character(seqnames(cpgs)) %in% filter_seq_levels]
   
   # Sample CpGs
   sample_cpgs = sample(cpgs, number_cpgs)

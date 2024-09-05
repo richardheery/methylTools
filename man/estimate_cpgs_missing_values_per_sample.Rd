@@ -8,7 +8,7 @@ estimate_cpgs_missing_values_per_sample(
   meth_rse,
   assay = 1,
   number_cpgs = 1000,
-  first_seq_only = TRUE
+  filter_seq_levels = NULL
 )
 }
 \arguments{
@@ -19,8 +19,8 @@ Should be either an index or the name of an assay. Default is the first assay.}
 
 \item{number_cpgs}{Number of CpG sites to sample. Default is 1000.}
 
-\item{first_seq_only}{A logical value indicating whether to restrict sampling to
-the first sequence level of meth_rse to increase speed. Default value is TRUE.}
+\item{filter_seq_levels}{An optional vector with the sequence levels to restrict sampling of CpGs to.
+Setting to just a single sequence level can substantially speed up running time.}
 }
 \value{
 A numeric vector with the proportion of missing values found in each sample.
